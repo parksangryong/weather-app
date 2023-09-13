@@ -30,7 +30,7 @@ function Home() {
     };
 
     getLocation();
-    console.log(foreweatherData);
+    //console.log(foreweatherData);
   }, []);
 
   // 현재 위치 정보 가져오기
@@ -45,13 +45,13 @@ function Home() {
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
-    console.log(response.data);
+    //console.log(response.data);
     setWeatherData(response.data);
 
     const fresponse = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
     );
-    console.log(fresponse.data.list);
+    //console.log(fresponse.data.list);
     setforeWeatherData(fresponse.data.list);
   };
 
