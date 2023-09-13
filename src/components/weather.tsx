@@ -15,11 +15,11 @@ const Weather: React.FC<WeatherProps> = ({ weatherData }) => {
         {weatherData.main.feels_like}
         °C)
       </p>
-      <p>습도 : {weatherData.main.humidity}</p>
+      <p>습도 : {weatherData.main.humidity}%</p>
       <p>날씨: {weatherData.weather[0].description}</p>
       <p>
-        바람: 속도({weatherData.wind.speed}) / 각도({weatherData.wind.deg}) /
-        돌풍({weatherData.wind.gust})
+        바람: 속도({weatherData.wind.speed}m/s) / 각도({weatherData.wind.deg}°)
+        / 돌풍({weatherData.wind.gust}m/s)
       </p>
     </div>
   );

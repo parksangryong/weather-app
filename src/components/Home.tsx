@@ -3,6 +3,7 @@ import axios from "axios";
 import Weather from "./weather";
 import Weather2 from "./weather2";
 import Weather3 from "./weather3";
+import dayjs from "dayjs";
 
 const API_KEY = "8d5c271d5aeaf42cb0a8625bd3598f92";
 
@@ -12,6 +13,10 @@ function Home() {
   //  api에서 받아올 날씨 데이터
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [latitude, setLatitude] = useState<number>(0);
+  const [longitude, setLongitude] = useState<number>(0);
+
+  const currentDate = dayjs().format("YYYY-MM-DD HH:mm:ss");
 
   useEffect(() => {
     // 위치 정보를 가져오는 함수
@@ -19,6 +24,8 @@ function Home() {
       try {
         const position = await getCurrentPosition();
         const { latitude, longitude } = position.coords;
+        setLatitude(latitude);
+        setLongitude(longitude);
 
         // 날씨 정보를 가져오는 함수
         fetchWeather(latitude, longitude);
@@ -58,6 +65,11 @@ function Home() {
   return (
     <div className="home">
       <h3>실시간 날씨 정보</h3>
+      <label>위도 : </label>
+      <input type="number" value={latitude} readOnly />
+      <label>경도 : </label>
+      <input type="number" value={longitude} readOnly />
+      <label>시각 : {currentDate}</label>
       {loading && <p>날씨 정보를 불러오는 중...</p>}
       {error && <p>{error}</p>}
       {weatherData && <Weather weatherData={weatherData} />}

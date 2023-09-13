@@ -12,8 +12,8 @@ function WeatherSearch() {
   //  api에서 받아올 날씨 데이터
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [latitude, setLatitude] = useState<number>(0);
-  const [longitude, setLongitude] = useState<number>(0);
+  const [latitude, setLatitude] = useState<number>(37.5665);
+  const [longitude, setLongitude] = useState<number>(126.978);
   // 위도 및 경도
 
   useEffect(() => {
@@ -52,12 +52,18 @@ function WeatherSearch() {
       <label>위도 : </label>
       <input
         type="number"
+        min="-90"
+        max="90"
+        step="0.01"
         value={latitude}
         onChange={(e) => setLatitude(e.target.valueAsNumber)}
       />
       <label>경도 : </label>
       <input
         type="number"
+        min="-180"
+        max="180"
+        step="0.01"
         value={longitude}
         onChange={(e) => setLongitude(e.target.valueAsNumber)}
       />
