@@ -3,6 +3,7 @@ import Footer from "./components/footer";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import WeatherSearch from "./components/Weather_search";
+import "./App.css";
 
 function App() {
   return (

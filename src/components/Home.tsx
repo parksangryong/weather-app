@@ -64,24 +64,38 @@ function Home() {
 
   return (
     <div className="home">
-      <h3>실시간 날씨 정보</h3>
-      <label>위도 : </label>
-      <input type="number" value={latitude} readOnly />
-      <label>경도 : </label>
-      <input type="number" value={longitude} readOnly />
-      <label>시각 : {currentDate}</label>
-      {loading && <p>날씨 정보를 불러오는 중...</p>}
-      {error && <p>{error}</p>}
-      {weatherData && <Weather weatherData={weatherData} />}
-      <hr />
-      {foreweatherData && <h4>5일간 날씨</h4>}
-      {foreweatherData &&
-        foreweatherData.map((forecast: any, index: number) => (
-          <Weather2 key={index} foreweather={forecast} />
-        ))}
-      {weatherData && weatherData.coord && (
-        <Weather3 data={weatherData} place={weatherData.name} />
-      )}
+      <div className="home-info">
+        <div className="lati">
+          <label>위도 : </label>
+          <input type="number" value={latitude} readOnly />
+        </div>
+        <div className="long">
+          <label>경도 : </label>
+          <input type="number" value={longitude} readOnly />
+        </div>
+        <div className="date">
+          <label>시각 : </label>
+          <input type="text" value={currentDate} readOnly />
+        </div>
+      </div>
+      <div className="home-search1">
+        {loading && <p>날씨 정보를 불러오는 중...</p>}
+        {error && <p>{error}</p>}
+        {weatherData && <Weather weatherData={weatherData} />}
+      </div>
+
+      <div className="home-search2">
+        {weatherData && <h4>5일간 날씨</h4>}
+        {foreweatherData &&
+          foreweatherData.map((forecast: any, index: number) => (
+            <Weather2 key={index} foreweather={forecast} />
+          ))}
+      </div>
+      <div className="home-search3">
+        {weatherData && weatherData.coord && (
+          <Weather3 data={weatherData} place={weatherData.name} />
+        )}
+      </div>
     </div>
   );
 }

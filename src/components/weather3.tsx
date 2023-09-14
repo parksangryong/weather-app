@@ -18,7 +18,7 @@ interface MapCardProps {
 
 const Weather3: React.FC<MapCardProps> = ({ data, place }) => {
   return (
-    <div>
+    <div className="weather3">
       <h4>지도</h4>
       <MapContainer
         center={[data.coord.lat, data.coord.lon]}

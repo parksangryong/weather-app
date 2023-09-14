@@ -6,21 +6,39 @@ interface WeatherProps {
 
 const Weather: React.FC<WeatherProps> = ({ weatherData }) => {
   return (
-    <div>
+    <div className="weather1">
       <h4>현재 날씨</h4>
-      <p>나라 : {weatherData.sys.country}</p>
-      <p>도시: {weatherData.name}</p>
-      <p>
-        온도: {weatherData.main.temp}°C (체감온도 :{" "}
-        {weatherData.main.feels_like}
-        °C)
-      </p>
-      <p>습도 : {weatherData.main.humidity}%</p>
-      <p>날씨: {weatherData.weather[0].description}</p>
-      <p>
-        바람: 속도({weatherData.wind.speed}m/s) / 각도({weatherData.wind.deg}°)
-        / 돌풍({weatherData.wind.gust}m/s)
-      </p>
+      <div className="w1-txt">
+        <div>
+          <div className="fspan">나라 : </div>
+          <div className="sspan">{weatherData.sys.country}</div>
+        </div>
+        <div>
+          <div className="fspan">도시 : </div>
+          <div className="sspan">{weatherData.name}</div>
+        </div>
+        <div>
+          <div className="fspan">온도 : </div>
+          <div className="sspan">
+            {weatherData.main.temp}°C (체감온도 : {weatherData.main.feels_like}
+            °C)
+          </div>
+        </div>
+        <div>
+          <div className="fspan">습도 : </div>
+          <div className="sspan">{weatherData.main.humidity}%</div>
+        </div>
+        <div>
+          <div className="fspan">날씨 : </div>
+          <div className="sspan">{weatherData.weather[0].description}</div>
+        </div>
+        <div>
+          <div className="fspan">풍속 : </div>
+          <div className="sspan">
+            {weatherData.wind.speed}m/s({weatherData.wind.deg}°)
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

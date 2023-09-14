@@ -3,6 +3,7 @@ import axios from "axios";
 import Weather from "./weather";
 import Weather2 from "./weather2";
 import Weather3 from "./weather3";
+import dayjs from "dayjs";
 
 const API_KEY = "8d5c271d5aeaf42cb0a8625bd3598f92";
 
@@ -15,6 +16,8 @@ function WeatherSearch() {
   const [latitude, setLatitude] = useState<number>(37.5665);
   const [longitude, setLongitude] = useState<number>(126.978);
   // 위도 및 경도
+
+  const currentDate = dayjs().format("YYYY-MM-DD HH:mm:ss");
 
   useEffect(() => {
     // 위치 정보를 가져오는 함수
@@ -47,38 +50,52 @@ function WeatherSearch() {
   };
 
   return (
-    <div className="w-search">
-      <h3>검색한 지역 날씨 정보</h3>
-      <label>위도 : </label>
-      <input
-        type="number"
-        min="-90"
-        max="90"
-        step="0.01"
-        value={latitude}
-        onChange={(e) => setLatitude(e.target.valueAsNumber)}
-      />
-      <label>경도 : </label>
-      <input
-        type="number"
-        min="-180"
-        max="180"
-        step="0.01"
-        value={longitude}
-        onChange={(e) => setLongitude(e.target.valueAsNumber)}
-      />
-      {loading && <p>날씨 정보를 불러오는 중...</p>}
-      {error && <p>{error}</p>}
-      {weatherData && <Weather weatherData={weatherData} />}
-      <hr />
-      {foreweatherData && <h4>5일간 날씨</h4>}
-      {foreweatherData &&
-        foreweatherData.map((forecast: any, index: number) => (
-          <Weather2 key={index} foreweather={forecast} />
-        ))}
-      {weatherData && weatherData.coord && (
-        <Weather3 data={weatherData} place={weatherData.name} />
-      )}
+    <div className="home">
+      <div className="home-info">
+        <div className="lati">
+          <label>위도 : </label>
+          <input
+            type="number"
+            min="-90"
+            max="90"
+            step="0.01"
+            value={latitude}
+            onChange={(e) => setLatitude(e.target.valueAsNumber)}
+          />
+        </div>
+        <div className="long">
+          <label>경도 : </label>
+          <input
+            type="number"
+            min="-180"
+            max="180"
+            step="0.01"
+            value={longitude}
+            onChange={(e) => setLongitude(e.target.valueAsNumber)}
+          />
+        </div>
+        <div className="date">
+          <label>시각 : </label>
+          <input type="text" value={currentDate} readOnly />
+        </div>
+      </div>
+      <div className="home-search1">
+        {loading && <p>날씨 정보를 불러오는 중...</p>}
+        {error && <p>{error}</p>}
+        {weatherData && <Weather weatherData={weatherData} />}
+      </div>
+      <div className="home-search2">
+        {weatherData && <h4>5일간 날씨</h4>}
+        {foreweatherData &&
+          foreweatherData.map((forecast: any, index: number) => (
+            <Weather2 key={index} foreweather={forecast} />
+          ))}
+      </div>
+      <div className="home-search3">
+        {weatherData && weatherData.coord && (
+          <Weather3 data={weatherData} place={weatherData.name} />
+        )}
+      </div>
     </div>
   );
 }
